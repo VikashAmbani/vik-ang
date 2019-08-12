@@ -1,3 +1,31 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+  <p>
+    {{title}}
+  </p>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="col-sm-12">
+        <div class="form-group">
+            Change Background
+            <span class="col-sm-2" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true"
+              (colorPickerChange)="onChangeColor($event)" [(colorPicker)]="color"><i class="fa fa-eyedropper"></i></span>
+        </div>
+        <div class="col-sm-12">
+          <input type="file" class="form-control" (change)="getFile($event)" />
+          <img src="{{bgimages}}" *ngIf="bgimages" width="200" height="200" />
+        </div>
+      </div>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="t.value"
+          placeholder="Title" *ngIf="t.box" />
+      </div>
+      <span class="col-sm-2" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true"
+        (colorPickerChange)="onChangeColor($event)" [(colorPicker)]="t.color"><i class="fa fa-eyedropper"></i></span>
+    </div>
+    <div class="col-sm-6" [style.background-color]="color"  >
+      <a class="col-sm-12" href="javascript:;" [style.color]="t.color" (click)="openTitle()">{{ t.value }}</a>
+    </div>
+    {{bgimages}}
+  </div>
+</div>
