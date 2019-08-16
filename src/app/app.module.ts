@@ -14,6 +14,7 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VhttpService, AuthInterceptor } from './service/vhttp.service';
+import { GalleryComponent } from './gallery/gallery.component';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private auth: VkhtService,
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
+  {path: 'gallery', component: GalleryComponent,canActivate:[AuthGuard]},
   {path: '**', redirectTo: 'login'}
 ]
 @NgModule({
@@ -42,7 +44,8 @@ const routes: Routes = [
     LoginComponent,
     AppHeaderComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

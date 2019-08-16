@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VkhtService } from '../service/vkht.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { read } from 'fs';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,8 +33,8 @@ export class DashboardComponent implements OnInit {
   getFile(e){
     let file = e.target.files[0];
     var reader = new FileReader();
-    reader.onloadend = (e) => {
-        this.bgimages=e.target['result'];
+    reader.onload = (e) => {
+         this.bgimages=e.target['result'];
     }
     reader.readAsDataURL(file);
   }

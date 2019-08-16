@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Gallery:</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">Record Video and Download it!</p>
+    </div>
+  </div>
+  <video id='player' width="200" height="200" class="hide"></video>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="col-sm-3">
+        <button class="btn btn-success" (click)="requestPermission()">Start Camera</button>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-success" [disabled]="desableRecording" (click)="recording()">Start Recording</button>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-success" [disabled]="desableStop" (click)="preparedata()">Stop Recording</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <ul class="list-group">
+            <li class="list-group-item"> Downloads List:</li>
+            <li class="list-group-item" *ngFor="let a of VideoList;let i=index">
+              <a class="control-label" [attr.href]="getUrl(a)" download="{{a.download}}">Video {{(i+1)}} Click To Download</a>
+              &nbsp;&nbsp;<button type="button" class="btn btn-primary fa fa-play" [class.hide]="a.show"
+                (click)="play(a,0)">Play</button>
+              <button type="button" class="btn btn-primary fa fa-pause" [class.hide]="!a.show"
+                (click)="play(a,1)">Close</button>
+            </li>
+            <li class="list-group-item"> Total Video: <span [class.hide]="!desableStop">{{vdeoDList.length}}</span></li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <video [attr.src]="vdeoUrl" [class.hide]="!vdeoUrl" width="300" controls></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
