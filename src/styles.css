@@ -7,3 +7,11 @@ div{
 .hide{
     display: none
 }
+.navbar-light{
+   text-transform: uppercase;
+}
+.navbar > .nav-link.active{
+    color:#fff !important;
+    border-bottom: 2px solid;
+    border-bottom-color: darkred;
+}

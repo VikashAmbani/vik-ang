@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(public router: Router,private callApi:VkhtService){
     this.isLogin=this.callApi.isLogin()
     if(this.isLogin){
-      this.router.navigate(["/dashboard"])
+      // this.router.navigate(["/dashboard"])
     }
   }
 

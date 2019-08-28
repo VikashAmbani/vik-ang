@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule,Injectable } from '@angular/core';
-import { Router,RouterModule,Routes,CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router,RouterModule,Routes,CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ExtraOptions } from '@angular/router';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpModule,} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VhttpService, AuthInterceptor } from './service/vhttp.service';
 import { GalleryComponent } from './gallery/gallery.component';
+import { VlangPipe } from './vlang.pipe';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private auth: VkhtService,
@@ -31,8 +32,14 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: 'enabled',
+  // ...any other options you'd like to use
+};
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'home/:tab', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
   {path: 'gallery', component: GalleryComponent,canActivate:[AuthGuard]},
@@ -45,11 +52,12 @@ const routes: Routes = [
     AppHeaderComponent,
     HomeComponent,
     DashboardComponent,
-    GalleryComponent
+    GalleryComponent,
+    VlangPipe
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,routerOptions),
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
